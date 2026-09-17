@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课程日志 · 15周记录</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #E9E6DC;
+    --paper-raised: #F4F2EA;
+    --ink: #23281F;
+    --ink-soft: #5B5F52;
+    --rule: #CCC7B7;
+    --accent: #33507A;
+    --accent-soft: #DCE2E9;
+    --gold: #A9762C;
+    --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --paper: #1B1E19;
+      --paper-raised: #23271F;
+      --ink: #E8E6DC;
+      --ink-soft: #A6A99B;
+      --rule: #3A3E33;
+      --accent: #8FAAD6;
+      --accent-soft: #2A3444;
+      --gold: #D4A24E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B1E19;
+    --paper-raised: #23271F;
+    --ink: #E8E6DC;
+    --ink-soft: #A6A99B;
+    --rule: #3A3E33;
+    --accent: #8FAAD6;
+    --accent-soft: #2A3444;
+    --gold: #D4A24E;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .frame {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  header.masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  header.masthead h1 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 28px;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  header.masthead .subtitle {
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+    nav.weeks { display: flex; overflow-x: auto; gap: 6px; padding-bottom: 8px; }
+    nav.weeks .week-item { flex: 0 0 auto; }
+  }
+
+  nav.weeks {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--rule);
+    padding-right: 12px;
+  }
+  @media (max-width: 720px) {
+    nav.weeks { border-right: none; border-bottom: 1px solid var(--rule); padding-right: 0; padding-bottom: 10px; }
+  }
+  .week-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-align: left;
+    font-family: var(--font-sans);
+    color: var(--ink-soft);
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .week-item .num {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--ink-soft);
+    min-width: 18px;
+  }
+  .week-item:hover { background: var(--paper-raised); color: var(--ink); }
+  .week-item.active {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+  .week-item.active .num { color: var(--accent); }
+  .week-item .count {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+
+  main.week-view h2 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  main.week-view .week-range {
+    color: var(--ink-soft);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  section.block { margin-bottom: 32px; }
+  section.block h3 {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  section.block h3 .hint {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .entry {
+    background: var(--paper-raised);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+    gap: 10px;
+  }
+  .entry-name {
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .entry-meta {
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .entry-body {
+    color: var(--ink);
+    white-space: pre-wrap;
+  }
+  .entry-lesson {
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .empty {
+    color: var(--ink-soft);
+    font-size: 13px;
+    padding: 16px;
+    border: 1px dashed var(--rule);
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+  <header class="masthead">
+    <h1>课程日志</h1>
+    <div class="subtitle">15周 · AI使用日志与课后总结</div>
+  </header>
+
+  <div class="layout">
+    <nav class="weeks" id="weekNav"></nav>
+    <main class="week-view" id="weekView"></main>
+  </div>
+</div>
+
+<script>
+// ------- 内容数据:每次新增/修改条目都改这里 -------
+const WEEKS = Array.from({ length: 15 }, (_, i) => ({
+  week: i + 1,
+  logs: [],       // { name, date, content }
+  summaries: []   // { lesson, name, content }
+}));
+// ---------------------------------------------------
+
+let activeWeek = 1;
+
+function renderNav() {
+  const nav = document.getElementById('weekNav');
+  nav.innerHTML = '';
+  WEEKS.forEach(w => {
+    const btn = document.createElement('button');
+    btn.className = 'week-item' + (w.week === activeWeek ? ' active' : '');
+    const total = w.logs.length + w.summaries.length;
+    btn.innerHTML = `<span class="num">${String(w.week).padStart(2,'0')}</span><span>第${w.week}周</span>` +
+      (total ? `<span class="count">${total}</span>` : '');
+    btn.onclick = () => { activeWeek = w.week; renderNav(); renderView(); };
+    nav.appendChild(btn);
+  });
+}
+
+function renderView() {
+  const view = document.getElementById('weekView');
+  const w = WEEKS.find(x => x.week === activeWeek);
+  view.innerHTML = `
+    <h2>第 ${w.week} 周</h2>
+    <div class="week-range">共 ${w.logs.length} 条 AI 使用日志 · ${w.summaries.length} 条课后总结</div>
+    <section class="block">
+      <h3>AI 使用日志<span class="hint">每人每周一条</span></h3>
+      <div id="logsBox"></div>
+    </section>
+    <section class="block">
+      <h3>课后总结<span class="hint">每节课一条</span></h3>
+      <div id="summariesBox"></div>
+    </section>
+  `;
+
+  const logsBox = document.getElementById('logsBox');
+  if (w.logs.length === 0) {
+    logsBox.innerHTML = `<div class="empty">本周还没有人提交 AI 使用日志。</div>`;
+  } else {
+    w.logs.forEach(log => {
+      const el = document.createElement('div');
+      el.className = 'entry';
+      el.innerHTML = `
+        <div class="entry-head">
+          <span class="entry-name">${escapeHtml(log.name || '未署名')}</span>
+          <span class="entry-meta">${escapeHtml(log.date || '')}</span>
+        </div>
+        <div class="entry-body">${escapeHtml(log.content || '')}</div>
+      `;
+      logsBox.appendChild(el);
+    });
+  }
+
+  const sumBox = document.getElementById('summariesBox');
+  if (w.summaries.length === 0) {
+    sumBox.innerHTML = `<div class="empty">本周还没有课后总结。</div>`;
+  } else {
+    w.summaries.forEach(s => {
+      const el = document.createElement('div');
+      el.className = 'entry';
+      el.innerHTML = `
+        <div class="entry-lesson">${escapeHtml(s.lesson || '课次未标注')}</div>
+        <div class="entry-head">
+          <span class="entry-name">${escapeHtml(s.name || '未署名')}</span>
+        </div>
+        <div class="entry-body">${escapeHtml(s.content || '')}</div>
+      `;
+      sumBox.appendChild(el);
+    });
+  }
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+renderNav();
+renderView();
+</script>
+</body>
+</html>
